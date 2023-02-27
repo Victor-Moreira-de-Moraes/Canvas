@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas - Aula 09 </title>
+</head>
+<body>
+    <canvas id="desenho1" width="500" height="500" style="border: 2px solid #000">
+        <h3>Seu browser não possui suporte ao canvas!</h3>
+    </canvas>
+
+    <script type="text/javascript">
+        let canvas = document.getElementById('desenho1')
+        let ctx = canvas.getContext('2d')
+
+        function desenha() {
+            ctx.clearRect(0,0,500,500)
+
+            ctx.moveTo(185,195)
+            ctx.lineTo(185,195)
+            ctx.arcTo(350,195,320,305,15)
+            ctx.arcTo(320,305,140,305,15)
+            ctx.arcTo(140,305,170,195,15)
+            ctx.arcTo(170,195,350,195,15)
+            ctx.lineTo(185,195)
+
+            ctx.stroke()
+
+        } desenha()
+    </script>
+
+</body>
+</html>

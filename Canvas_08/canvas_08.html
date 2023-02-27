@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas - aula 08</title>
+</head>
+<body>
+    <canvas id="desenho1" width="500" height="500" style = "border:2px solid #000">
+        <h3>Seu browser não possui suporte ao canvas!</h3>
+    </canvas>
+
+    <script>
+        let canvas = document.getElementById("desenho1")
+        let ctx = canvas.getContext('2d')
+        let tamMax = 40 // Tamanho máximo
+        let tamMin = 10 // Tamanho mínimo
+        let maxCirculos = 50
+        let angIni = 0 // Ângulo inicial
+        let angFim = 0 //Ângulo final
+        
+
+        function desenho() {
+            ctx.clearRect(0,0,500,500)
+
+            //Arc: posição X, posição Y, raio, ângulo inicial, ângulo final, sentido.
+            //sentido: true para horário e false para anti-horário.
+            //Radiano em graus: (3,14 / 180) * ang_grau
+            
+            // Circulos coloridos aleatórios
+            for(let i = 0; i<maxCirculos; i++) {
+            ctx.beginPath()
+            ctx.fillStyle ='rgb('+Math.random()*255+','+Math.random()*255+','+Math.random()*255+')' // + é concatenar
+            ctx.arc(Math.random()*500,Math.random()*500,Math.random()*tamMax+tamMin,(Math.PI/180)*0,(Math.PI/180)*360,true)
+            ctx.fill()
+            }
+
+            // Circulo preto no meio da tela
+            ctx.beginPath()
+            ctx.fillStyle = '#000'
+            ctx.arc(250,250,150,(Math.PI/180)*angIni,(Math.PI/180)*angFim,false)
+            ctx.fill()
+            
+            angFim++
+            if(angFim>360)
+            angFim = 0
+
+            animar = requestAnimationFrame(desenho)
+        } desenho()
+
+    </script>
+</body>
+</html>

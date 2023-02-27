@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas - Aula 01</title>
+    <style type="text/css">
+        #desenho1 {
+            /*width: 500px;
+            height: 500px;*/
+            border: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="desenho1" width="500" height="500">
+        <h1>CFB Cursos</h1>
+        <h3>Seu browser não possui suporte ao canvas!</h3>
+    </canvas>
+
+    <script type="text/javascript">
+        var canvas = document.getElementById("desenho1") // Aqui estou juntando o canvas HTML com o JS.
+        var ctx = canvas.getContext('2d')  // ctx = Canvas contexto, aqui estou configurando o contexto de trabalho do meu canvas, no caso aqui 2D.
+
+        ctx.fillStyle = "#00f" //ou rgb(0,0,255) 
+        //No fillStyle eu vou definir qual vai ser o meu preenchimento, aqui no caso é azul, segue as mesmas regras das css.
+
+        ctx.fillRect(0,0,100,100) // "()" Aqui nós vamos informar posição X e Y, largura e altura do desenho dentro do canvas.
+        // É uma função que permite desenhar um retângulo preenchido, ou seja, ele vai pegar o último estilo definido antes dele e vai aplicar essa cor.
+
+        ctx.fillStyle = "rgba(255,0,0,0.5)" //rgba, o "a" é de alpha. O 0.5(50%) é a opacidade. 
+        ctx.fillRect(50,50,100,100)
+    </script>
+</body>
+</html>
+

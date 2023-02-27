@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+     <title>Canvas - Aula 06</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+    <canvas id="desenho1" width="500" height="500" style="border: 2px solid #000;">
+        <h3>Seu browser não possui suporte ao canvas!</h3>
+    </canvas>
+
+    <script type="text/javascript">
+        var canvas = document.getElementById("desenho1") //Deixar aqui em cima da um ganho de desempenho(extremamente pequeno).
+        var ctx = canvas.getContext('2d')
+        let dx = 1 // Direção do X.
+        let dy = 0 // Direção do Y.
+        let px = 0 // Posição do X.
+        let py = 0 // Posição do Y.
+        let anima // variável anima
+        let l_ret = a_ret = 50 // Largura do retângulo(l_ret) e altura do retângulo(a_ret) são iguais a 50
+        let l_canvas = a_canvas = 500 //Variáveis relacionadas com o tamanho do canvas, largura canvas(l_canvas) e altura canvas(a_canvas) são iguais a 500.
+       
+        function desenha() {
+        
+            ctx.clearRect(0,0,l_canvas,a_canvas) //Vai limpar todo o canvas
+
+            ctx.fillStyle = "#f00" // Define a cor do quadrado.
+            ctx.fillRect(px,py,l_ret,a_ret) // Define posição do quadrado
+
+            ctx.lineWidth = 3 // Define a largura do contorno.
+            ctx.strokeStyle = '#000' // Estilo do contorno, no caso é preto.
+            ctx.strokeRect(px,py,l_ret,a_ret) // renderiza o contorno.
+ 
+            px += dx // px = px + dx
+            py += dy // py = py + dy
+
+            // Instruções de controle de movimentação
+            if ((px <= 0) && (py <= 0)) {
+                dx = 2
+                dy = 0
+            } // Se ele estiver na esquerda(px <= 0) e em cima(py <= 0) a posição X vai ser 1 e Y vai ser 0(Se movimentando apenas para a esquerda.)
+            if ((px + l_ret >= l_canvas) && (py <= 0)) {
+                dx = 0
+                dy = 2
+            } // Posição X + a largura do retângulo tem que ser maior ou igual a largura do canvas(px + l_ret >= l_canvas) e tem que estar em cima(py <= 0), ele vai mover Y em 1 e X vai ser 0.
+            if ((px + l_ret >= l_canvas) && (py + a_ret >= a_canvas)){
+                dx = -2
+                dy = 0
+            } // Posição X + a largura do retângulo tem que ser maior ou igual a largura do canvas(px + l_ret >= l_canvas) e posição Y + altura do retângulo tem que ser maior ou igual a altura do canvas(py + a_ret >= a_canvas), direção X vai ser -1.
+            if ((px <= 0) && (py + a_ret >= a_canvas)) {
+                dx = 0
+                dy = -2
+            } // Se ele estiver na esquerda(px <= 0) e posição Y + altura do retângulo tem que ser maior ou igual a altura do canvas(py + a_ret >= a_canvas), direção X vai ser -1.
+
+            anima = requestAnimationFrame(desenha) // Dentro dos parênteses ele precisa da função que ele vai rodar. 
+        } desenha()
+    </script>
+</body>
+</html>
+

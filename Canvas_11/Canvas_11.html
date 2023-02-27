@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas - Aula 11</title>
+</head>
+<body>
+    <canvas id="desenho1" width="500" height="500" style="border: 2px solid #000">
+        <h3>Seu navegador não possui suporte ao canvas!</h3>
+    </canvas>
+
+    <img src="megaman.png">
+
+    <script type="text/javascript">
+        let canvas = document.getElementById('desenho1')
+        let ctx = canvas.getContext('2d')
+
+        let mario = new Image()
+        mario.src = "megaman.png"
+        
+        let nSprite = 0 // número DO sprite
+        let posIniX = 0 // posição inicial X 
+        let Limagem = 0 // Largura da imagem
+        let Aimagem = 0 // Altura da imagem
+        let largSprite = 0 // largura do sprite
+        let altSprite = 0 // Altura do sprite
+        let numSprites = 5 // número total DE sprites
+
+        // Posição inicial X é o numero do sprite que eu quero indicar
+        
+       mario.addEventListener('load',()=>{
+            Limagem = mario.width // Limagem(largura da imagem) é igual a largura(width) da imagem 
+            Aimagem = mario.height * 4// Aimagem(altura da imagem) é igual a altura(height) da imagem vezes o número de personagens
+
+            largSprite = Limagem / numSprites // Largura do sprite é igual a largura da imagem dividido pelo número de sprites
+
+            altSprite = Aimagem / numSprites // A altura do sprite é igual a altura da imagem dividido pelo número total de sprites
+
+            posIniX = largSprite * nSprite // A posição inicial X é igual a largura do sprite vezes o número do sprite
+
+            //imagem, XiniRecorte, YiniRecorte, Lrecorte, Arecorte, posX, posY, Limagem, Aimagem
+            ctx.drawImage(mario,posIniX,0,largSprite,altSprite,0,0,largSprite,altSprite) 
+        })
+
+        let anima = setInterval(()=>{  // De um em um segundo essa função vai trocar o número do sprite
+            ctx.clearRect(0,0,500,500)
+            nSprite++
+            if(nSprite >= 4) {
+                nSprite = 0
+            }
+            posIniX = largSprite * nSprite
+            //imagem, XiniRecorte, YiniRecorte, Lrecorte, Arecorte, posX, posY, Limagem, Aimagem
+            ctx.drawImage(mario,posIniX,0,largSprite,altSprite,0,0,largSprite,altSprite) 
+        },1000)
+
+    </script>
+</body>
+</html>

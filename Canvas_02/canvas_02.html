@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas - Aula 02</title>
+
+    <script type="text/javascript">
+        function desenha() {
+        var px = 50 // Posição X.
+        var py = 50 // Posição Y.
+        var canvas = document.getElementById("desenho1") 
+        var ctx = canvas.getContext('2d')
+
+        ctx.fillStyle = "#00f"
+        ctx.rect(px,py,200,200) //O rect ao contrário do fillRect desenha um retângulo mas não preenche ele.
+        ctx.fill() //Para preencher o rentângulo, quando usamos o "fill" ele preenche tudo que está no nosso canvas.
+       //ctx.clearRect(50,50,100,100) 
+       // O clearRect() vai limpar determinada área do nosso canvas, dentro dele você coloca as mesmas propriedades do Rect ou fillRect. É como se eu tivesse criando um retângulo que é uma borracha.
+
+    }
+    </script>
+
+</head>
+<body onload="desenha()"> <!--Vamos chamar a nossa função no evento onload(faz algo quando a página for carregada) do body, que chama a função desenha() quando a página for carregada.-->
+
+    <canvas id="desenho1" width="500" height="500" style="border: 2px solid #000;">
+        <h3>Seu browser não possui suporte ao canvas!</h3>
+    </canvas>
+</body>
+</html>
+

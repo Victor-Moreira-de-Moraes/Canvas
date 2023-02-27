@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas - Aula 12</title>
+</head>
+<body>
+    <canvas id="desenho1" width="500" height="500" style="border: 2px solid #000">
+        <h3>Seu navegador não possui suporte ao canvas!</h3>
+    </canvas>
+
+    <img src="jogador.png">
+
+    <script type="text/javascript">
+        let canvas = document.getElementById('desenho1')
+        let ctx = canvas.getContext('2d')
+
+        let mario = new Image()
+        mario.src = "jogador.png"
+        
+        let nSprite = 0 // número DO sprite
+        let posIniX = 0 // posição inicial X 
+        let largSprite = 0 // largura do sprite
+        let altSprite = 0 // Altura do sprite
+        let numSprites = 4 // número total DE sprites
+        let posX = 0 // Posição X
+        let posY = 0 // Posição Y
+        let velocidade = 4
+        let cima = false, baixo = false, direita = false, esquerda = false // Essas variávei vão servir para sabermos quando temos uma dessas teclas pressionadas
+
+        //Quando a tecla estiver pressionada fica a variável fica true, e quando não estiver pressionada fica false
+
+        // Posição inicial X é o numero do sprite que eu quero indicar
+        
+       mario.addEventListener('load',()=>{
+
+            largSprite = mario.width / numSprites // Largura do sprite é igual a largura da imagem dividido pelo número de sprites
+
+            altSprite = mario.height / numSprites // A altura do sprite é igual a altura da imagem dividido pelo número total de sprites
+
+            posIniX = largSprite * nSprite // A posição inicial X é igual a largura do sprite vezes o número do sprite
+
+            //imagem, XiniRecorte, YiniRecorte, Lrecorte, Arecorte, posX, posY, Limagem, Aimagem
+            ctx.drawImage(mario,posIniX,0,largSprite,altSprite,posX,posY,largSprite,altSprite) 
+        })
+
+        /*let anima = setInterval(()=>{  // De um em um segundo essa função vai trocar o número do sprite
+            ctx.clearRect(0,0,500,500)
+            nSprite++
+            if(nSprite >= 4) {
+                nSprite = 0
+            }
+            posIniX = largSprite * nSprite
+            //imagem, XiniRecorte, YiniRecorte, Lrecorte, Arecorte, posX, posY, Limagem, Aimagem
+            ctx.drawImage(mario,posIniX,0,largSprite,altSprite,posX,posY,largSprite,altSprite) 
+        },100)*/
+
+        const desenha=()=>{
+            ctx.clearRect(0,0,500,500)
+            //imagem, XiniRecorte, YiniRecorte, Lrecorte, Arecorte, posX, posY, Limagem, Aimagem
+            ctx.drawImage(mario,posIniX,0,largSprite,altSprite,posX,posY,largSprite,altSprite) 
+        }
+
+        window.addEventListener('keydown',(event)=>{ 
+            if(event.keyCode == 37) { // Esquerda
+                esquerda = true
+            } 
+            else if(event.keyCode == 39) { // Direita
+                direita = true
+            }
+            else if(event.keyCode == 38) { // Cima
+                cima = true
+            }
+            else if(event.keyCode == 40) { // Baixo
+                baixo = true
+            }
+        }) 
+        //Evento para tecla dentro de window(janela)
+        // Keydown = tecla sem pressionar e keyup = tecla pressionada
+
+        window.addEventListener('keyup',(event)=>{ 
+            if(event.keyCode == 37) { // Esquerda
+                esquerda = false
+            } 
+            else if(event.keyCode == 39) { // Direita
+                direita = false
+            }
+            else if(event.keyCode == 38) { // Cima
+                cima = false
+            }
+            else if(event.keyCode == 40) { // Baixo
+                baixo = false
+            }
+        })
+
+        // Função que vai a todo momento verificar o valor dessas variáveis(true ou false) e atualizar a minha posição, as minhas varuiáveis de posição
+        const game=()=>{
+            if(cima) {
+                posY -= velocidade
+            }
+            if(baixo) {
+                posY += velocidade
+            }
+            if(esquerda) {
+                posX -= velocidade
+            }
+            if(direita) {
+                posX += velocidade
+            }
+            
+            requestAnimationFrame(game)
+            desenha()
+        }
+
+        requestAnimationFrame(game)
+
+        //const game=()=>{} é a mesma coisa que function game(){}
+        
+    </script>
+</body>
+</html>

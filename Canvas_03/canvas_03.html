@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+     <title>Canvas - Aula 03</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        function desenha() {
+        var px = 50 // Posição X.
+        var py = 50 // Posição Y.
+        var canvas = document.getElementById("desenho1") 
+        var ctx = canvas.getContext('2d')
+
+        ctx.moveTo(0,0) //Eu vou definir a posição inicial da minha linha com X e Y no meu canvas 2D.
+        ctx.lineTo(250,250) //Posição final da minha linha.
+        ctx.lineTo(400,250)
+        ctx.lineTo(400,100)
+        ctx.moveTo(250,250) // Vai definir uma nova posição inicial, para uma nova linha.
+        ctx.lineTo(200,300)
+        ctx.stroke() // Para renderizar linha nós temos que utilizar o stroke.
+        
+
+        //ctx.fillStyle = "#00f"
+        //ctx.rect(px,py,200,200) 
+        //ctx.fill() 
+
+       //ctx.clearRect(50,50,100,100) 
+
+    }
+    </script>
+</head>
+<body onload="desenha()">
+    <canvas id="desenho1" width="500" height="500" style="border: 2px solid #000;">
+        <h3>Seu browser não possui suporte ao canvas!</h3>
+    </canvas>
+</body>
+</html>
+

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+     <title>Canvas - Aula 04</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+       let px = 0
+       function desenha() {
+        
+        var canvas = document.getElementById("desenho1") 
+        var ctx = canvas.getContext('2d')
+        ctx.clearRect(0,0,500,500) //Vai limpar todo o canvas
+
+        ctx.fillStyle = "#f00"
+        ctx.fillRect(px,0,50,50)
+
+        px++ // Atualiza a posição do quadrado
+        anima = requestAnimationFrame(desenha) // Dentro dos parênteses ele precisa da função que ele vai rodar.
+
+        
+    }
+    </script>
+</head>
+<body onload="desenha()">
+    <canvas id="desenho1" width="500" height="500" style="border: 2px solid #000;">
+        <h3>Seu browser não possui suporte ao canvas!</h3>
+    </canvas>
+</body>
+</html>
+

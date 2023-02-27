@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+     <title>Canvas - Aula 05</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+    <canvas id="desenho1" width="500" height="500" style="border: 2px solid #000;">
+        <h3>Seu browser não possui suporte ao canvas!</h3>
+    </canvas>
+
+    <script type="text/javascript">
+        var canvas = document.getElementById("desenho1") //Deixar aqui em cima da um ganho de desempenho(extremamente pequeno).
+        var ctx = canvas.getContext('2d')
+        let dx = 1 // Direção do X.
+        let px = 0
+        let py = 10
+        let anima
+        let l_ret = a_ret = 50 // Largura do retângulo(l_ret) e altura do retângulo(a_ret) são iguais a 50
+        let l_canvas = a_canvas = 500 //Variáveis relacionadas com o tamanho do canvas, largura canvas(l_canvas) e altura canvas(a_canvas) são iguais a 500.
+       
+        function desenha() {
+        
+            ctx.clearRect(0,0,l_canvas,a_canvas) //Vai limpar todo o canvas
+
+            ctx.fillStyle = "#f00"
+            ctx.fillRect(px,py,l_ret,a_ret)
+
+            px += dx
+            if ((px + l_ret >= l_canvas) || (px <= 0)) {
+                dx *= -1 // Inverto o valor com o *=.
+            } // Se a posição X do quadrado for maior ou igual a largura do canvas(500), eu vou começar a mover ele para a esquerda(modificar a direção do X para -1) ou se a posição do quadrado for menor ou igual a zero, dx fica positivo e se move para direita. 
+
+            anima = requestAnimationFrame(desenha) // Dentro dos parênteses ele precisa da função que ele vai rodar. 
+        } desenha()
+    </script>
+</body>
+</html>
+

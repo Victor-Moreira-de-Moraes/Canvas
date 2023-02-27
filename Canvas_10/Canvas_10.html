@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas - Aula 10</title>
+</head>
+<body>
+    <canvas id="desenho1" width="500" height="500" style="border: 2px solid #000">
+        <h3>Seu browser não possui suporte ao canvas!</h3>
+    </canvas>
+
+    <img src="cores.jpg" width="100" height="100"> 
+    <script>
+        let canvas = document.getElementById('desenho1')
+        let ctx = canvas.getContext('2d')
+
+        let nave = new Image() //criei uma imagem aqui
+        nave.src="nave.jpg" // Diz para o programa onde está a imagem
+
+        let cores = new Image() 
+        cores.src="cores.jpg"
+        
+        nave.onload=()=>{ //arrow function = função anônima
+            ctx.drawImage(nave,0,0,100,100) //Desenha a imagem
+            //nome da imagem, x, y 
+        }
+
+        nave.addEventListener('load',()=>{
+            ctx.drawImage(cores,380,0,50,50,150,150,200,200) 
+        }) 
+
+        //Tanto o comando 'onload' e 'addEventListener' vão dar o mesmo resultado
+        
+    
+        //drawImage() parâmetros
+
+        // 1° nome da imagem e posição(x e y)
+        // 2° nome da imagem, posição(x e y) e tamanho da imagem(altura e largura)
+        // 3° nome da imagem, X inicial do recorte, Y inicial do recorte, Largura do recorte, Altura do recorte, posição(X e Y), Largura da imagem, Altura da imagem
+        
+        /*
+
+     * Nome da imagem
+
+     * Área de recorte dessa imagem
+        - X inicial do recorte
+        - Y inicial do recorte
+        - Largura do recorte
+        - Altura do recorte
+
+     * Posição e tamanho da imagem
+        - posição X da imagem
+        - posição Y da imagem
+        - Largura da imagem
+        - Altura da imagem
+
+        * Ele vai cortar tudo o que você pedir e apenas a área dentro do corte vai ser exibida.
+
+        * Na parte de altura e largura da imagem, você define a largura e altura da imagem já recortada, ou seja, quando formos recortar a imagem, temos que nos basear no tamanho real da imagem.
+        */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas - aula 08</title>
+</head>
+<body>
+    <canvas id="desenho1" height="500" width="500" style="border: 2px solid #000">
+        <h3>Seu browser não possui suporte ao canvas!</h3>
+    </canvas>
+
+    <script>
+        let canvas = document.getElementById('desenho1')
+        let ctx = canvas.getContext('2d')
+        let px = 1
+        let py = 1
+        let dx = 1
+        let dy = 1
+        let l_canvas = a_canvas = 500
+        let l_ret = a_ret = 50 
+
+        function desenha() {
+            ctx.clearRect(0,0,500,500)
+
+            ctx.fillStyle = '#f00'
+            ctx.fillRect(px,py,l_ret,a_ret)
+
+            ctx.lineWidth= 5
+            ctx.strokeStyle ='#000'
+            ctx.strokeRect(px,py,l_ret,a_ret)
+
+            px += dx
+            py += dy
+
+            if((py <= 0) && (px <= 0)) {
+                dx = -Math.random()*5
+                dy = Math.random()*5
+            }
+            if((px + l_ret >= l_canvas) && (py >= 0)) {
+                dx = -Math.random()*5
+                dy = Math.random()*5
+            }
+            if((px + l_ret >= l_canvas) && (py + a_ret >= a_canvas)) {
+                dx = -Math.random()*20
+                dy = -Math.random()*20
+            }
+            if((px <= 0) && (py + a_ret >= a_canvas)) {
+                dx = Math.random()*20
+                dy = Math.random()*20
+            }
+            if(px <= 0) {
+                dx = Math.random()*20
+                dy = Math.random()*20
+            }
+            if(py <= 0) {
+                dx = Math.random()*20
+                dy = Math.random()*20
+            }
+            if((py + a_ret >= a_canvas)) {
+                dx = -Math.random()*20
+                dy = -Math.random()*20
+            }
+            if((py >= 0) && (px <= 0)) {
+                dx = Math.random()*5
+                dy = Math.random()*5
+            }
+
+            animar = requestAnimationFrame(desenha)
+
+        } desenha()
+        
+    </script>
+</body>
+</html>
